@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { RecipesService } from '../recipes.service';
+import { Recipe } from '../recipe.model';
 
 @Component({
   selector: 'app-recipe-details',
@@ -8,10 +10,13 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class RecipeDetailsComponent implements OnInit {
   //TODO prepare recipe detail fetching from service
-  constructor(private route: ActivatedRoute) { }
+  recipe: Recipe;
+
+  constructor(private route: ActivatedRoute, private recipesService: RecipesService) { }
 
   ngOnInit(): void {
-    console.log(this.route.snapshot.params["id"]);
+    let id:number = this.route.snapshot.params["id"];
+    this.recipe = this.recipesService.getRecipe(id);
   }
 
 }
