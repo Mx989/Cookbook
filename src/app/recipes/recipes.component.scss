@@ -1,0 +1,33 @@
+
+.recipe {
+    width: 11.8vw;
+    height: 30vh;
+    display: inline-block;
+    border: 1px solid black;
+    overflow: hidden;
+    margin: 0.5vw;
+    position: relative;
+    
+    .img {
+        position: absolute;
+        height: 100%;
+ 
+    }
+
+    a {
+        text-decoration: none;
+        position: absolute;
+        margin: auto;
+        width: 100%;
+        bottom: 0px;
+        padding: 10px;
+        background: rgba(57, 204, 204, 0.75);
+        color: white;
+        font-weight: bold;
+    }
+
+    a:hover {
+        color: #dedede;
+        cursor: pointer;
+    }
+}

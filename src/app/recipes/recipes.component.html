@@ -1,1 +1,7 @@
-<p>recipes works!</p>
+<p *ngIf="!recipes"> No data </p>
+
+    <div *ngFor="let recipe of recipes" class="recipe">
+            <img [src]="recipe.imagePath"/>
+            <a [routerLink]="['/recipe/', recipe.id]">{{ recipe.name }}</a>
+    </div>
+
