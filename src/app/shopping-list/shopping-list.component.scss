@@ -1,3 +1,5 @@
+$mainColor: rgba(57, 204, 204, 0.75);
+
 .shopping-list {
     position: relative;
     top: 10vh;
@@ -33,4 +35,26 @@
     margin-left: 2vw;
     float: right;
     width: 10vw;
+}
+
+.clear-button {
+    all: unset;
+    margin-top: 1vh;
+    margin-right: 1vw;
+    float: right;
+    background: $mainColor;
+    border-radius: 2px;
+    padding: 6px;
+    color: white;
+    font-weight: bold;
+
+}
+
+.info {
+    margin-left: auto;
+    margin-top: auto;
+    position: fixed;
+    left: 49%;
+    top: 25vh;
+    z-index: 101;
 }

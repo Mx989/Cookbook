@@ -5,4 +5,7 @@
             <span class="amount-right">{{element.amount}}</span>
         </tr>
     </table>
+    <button class="clear-button" (click)="clearList()">Clear the list</button>
 </div>
+<br/>
+<span class="info" *ngIf="shoppingList.length < 1">The list is empty</span>

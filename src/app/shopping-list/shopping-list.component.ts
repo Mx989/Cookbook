@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ShoppingListService } from './shopping-list.service';
 import { Ingredient } from '../shared/models/ingredient.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-shopping-list',
@@ -9,7 +10,7 @@ import { Ingredient } from '../shared/models/ingredient.model';
 })
 export class ShoppingListComponent implements OnInit, OnDestroy {
 
-  constructor(private shoppingListService: ShoppingListService) { }
+  constructor(private shoppingListService: ShoppingListService, private router: Router) { }
 
   shoppingList: Ingredient[] = [];
 
@@ -22,5 +23,11 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.shoppingListSub.unsubscribe();
+  }
+
+  
+  clearList(): void {
+    this.shoppingListService.clearList();
+    this.router.navigate(['/']);
   }
 }
