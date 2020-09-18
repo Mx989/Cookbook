@@ -1,1 +1,24 @@
-<p> {{ recipe.name }} </p>
+<div class="background-blur" (click)="onClose()"></div>
+<div class="recipe-details-container">
+    <div class="recipe-details-container-div recipe-details-header">
+        <span class="recipe-title-label"> {{ recipe.name }} </span>
+        <button class="close-details-button" (click)="onClose()">Close</button>
+    </div>
+    <div class="recipe-details-container-div recipe-details-photo">
+        <img [src]="recipe.imagePath"/>
+        <div class="recipe-description">
+            {{recipe.description}}
+        </div>
+    </div>
+    <div class="recipe-details-container-div recipe-details-ingredients">
+        <ul>
+            <li *ngFor="let ingredient of recipe.ingredients">
+                {{ingredient.name}} {{ingredient.amount}}
+            </li>
+        </ul>
+    </div>
+    <div class="recipe-details-container-div">
+        <button class="add-to-list-button" (click)="toShoppingList()">Add to shopping list</button>
+    </div>
+
+</div>

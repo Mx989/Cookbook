@@ -1,4 +1,6 @@
 
+$mainColor: rgba(57, 204, 204, 0.75);
+
 .recipe {
     width: 11.8vw;
     height: 30vh;
@@ -14,19 +16,19 @@
  
     }
 
-    a {
+    p {
         text-decoration: none;
         position: absolute;
         margin: auto;
         width: 100%;
         bottom: 0px;
         padding: 10px;
-        background: rgba(57, 204, 204, 0.75);
+        background: $mainColor;
         color: white;
         font-weight: bold;
     }
 
-    a:hover {
+    p:hover {
         color: #dedede;
         cursor: pointer;
     }

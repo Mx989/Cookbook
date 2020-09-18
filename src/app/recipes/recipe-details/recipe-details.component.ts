@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { RecipesService } from '../recipes.service';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Recipe } from '../recipe.model';
+import { ShoppingListService } from 'src/app/shopping-list/shopping-list.service';
 
 @Component({
   selector: 'app-recipe-details',
@@ -10,13 +9,25 @@ import { Recipe } from '../recipe.model';
 })
 export class RecipeDetailsComponent implements OnInit {
   //TODO prepare recipe detail fetching from service
-  recipe: Recipe;
-
-  constructor(private route: ActivatedRoute, private recipesService: RecipesService) { }
+  @Input() recipe: Recipe;
+  @Output('closeDetails') close = new EventEmitter<void>();
+  
+  constructor(private shoppingListService: ShoppingListService) { }
 
   ngOnInit(): void {
-    let id:number = this.route.snapshot.params["id"];
-    this.recipe = this.recipesService.getRecipe(id);
+    console.log(this.recipe);
+    // let id:number = this.route.snapshot.params["id"];
+    // this.recipe = this.recipesService.getRecipe(id);
+  }
+
+  onClose() {
+    this.recipe = undefined;
+    this.close.emit();
+  }
+
+  toShoppingList() {
+    this.shoppingListService.addToShoppingList(this.recipe.ingredients);
+    this.onClose();
   }
 
 }

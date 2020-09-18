@@ -1,0 +1,36 @@
+.shopping-list {
+    position: relative;
+    top: 10vh;
+    margin-left: auto;
+    margin-right: auto;
+    width: 60vw;
+    min-height: 10vh;
+    z-index: 100;
+    background: white;
+    box-shadow: 0 2px 5px rgba($color: #000000, $alpha: 0.5);
+    font-size: 30px;
+}
+
+
+.shopping-list-row {
+    text-align: center;
+    width: 5vh;
+    border-bottom: 1px solid black;
+    padding: 10px;
+}
+
+.shopping-list-el {
+    margin: 1vh 2vh;
+
+}
+
+.text-left {
+    margin-left: 2vw;
+    width: 28vw;
+}
+
+.amount-right {
+    margin-left: 2vw;
+    float: right;
+    width: 10vw;
+}

@@ -1,0 +1,20 @@
+
+{
+    "recipes" : [ {
+        "id": 1,
+        "name": "Test Recipe 1",
+        "description": "Test 1",
+        "imagePath": "sss",
+        "ingredients": [ {
+            "name": "apple",
+            "amount": 5
+        },
+        {
+            "name": "pear",
+            "amount": 10
+        }
+    ]
+    }
+
+    ]
+}

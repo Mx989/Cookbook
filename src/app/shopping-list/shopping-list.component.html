@@ -1,1 +1,8 @@
-<p>shopping-list works!</p>
+<div class="shopping-list">
+    <table class="shopping-list-table">
+        <tr class="shopping-list-row" *ngFor="let element of shoppingList">
+            <span class="text-left">{{element.name}}</span>
+            <span class="amount-right">{{element.amount}}</span>
+        </tr>
+    </table>
+</div>
