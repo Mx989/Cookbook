@@ -5,4 +5,7 @@
             <p (click)="toggleRecipeDetails(recipeEl)">{{ recipeEl.name }}</p>
             <app-recipe-details *ngIf="selectedRecipeId == recipeEl.id" [recipe]="recipeEl" (closeDetails)="toggleRecipeDetails()"></app-recipe-details>
     </div>
+    <div class="recipe plus">
+            <p (click)="onAddNewRecipe()">Add new recipe</p> 
+        </div>
 

@@ -1,10 +1,18 @@
-<header>
+<header  *ngIf="isLoggedIn">
     <a routerLink="/recipes" class="logo">Cookbook</a>
 
     <nav>
         <ul>
             <li><a routerLink="/recipes">Recipes</a></li>
             <li><a routerLink="/shopping-list">Shopping List</a></li>
+
+            <div class="dropdown">
+                <li><a>Hello, {{ currentUser.username }}</a></li>
+                <div class="dropdown-content">
+                    <div class="dropdown-item">Settings</div>
+                    <div class="dropdown-item" (click)="onLogout()">Log out</div>
+                </div>
+            </div>
         </ul>
     </nav>
 </header>

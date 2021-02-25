@@ -5,7 +5,8 @@ $mainColor: rgba(57, 204, 204, 0.75);
     width: 11.8vw;
     height: 30vh;
     display: inline-block;
-    border: 1px solid black;
+    //border: 1px solid black;
+    box-shadow: 2px 7px 7px 2px rgba($color: (#000000), $alpha: 0.2);
     overflow: hidden;
     margin: 0.5vw;
     position: relative;
@@ -33,3 +34,12 @@ $mainColor: rgba(57, 204, 204, 0.75);
         cursor: pointer;
     }
 }
+
+  .plus {
+    background:
+      linear-gradient(rgba(57, 204, 204), rgba(57, 204, 204)),
+      linear-gradient(rgba(57, 204, 204), rgba(57, 204, 204));
+    background-position:center;
+    background-size: 30% 10px,10px 20%; /*thickness = 2px, length = 50% (25px)*/
+    background-repeat:no-repeat;
+  }

@@ -18,8 +18,11 @@ export class RecipesComponent implements OnInit, OnDestroy {
   constructor(private recipesService: RecipesService, private router: Router) { }
 
   ngOnInit(): void {
-    this.recipes = this.recipesService.getRecipes();
-    this.recipesService.uploadRecipes();
+    this.recipesService.getRecipes().subscribe(recipes => {
+      this.recipes = recipes;
+    });
+
+    //this.recipesService.uploadRecipes();
   }
 
   toggleRecipeDetails(recipe: Recipe = null) {
@@ -31,6 +34,10 @@ export class RecipesComponent implements OnInit, OnDestroy {
       //this.detailsOpen = !this.detailsOpen;
       //console.log(this.detailsOpen);
     }
+  }
+
+  onAddNewRecipe() {
+    this.router.navigate(['./addRecipe']);
   }
 
   ngOnDestroy(): void {

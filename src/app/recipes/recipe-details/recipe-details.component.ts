@@ -1,6 +1,11 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Recipe } from '../recipe.model';
 import { ShoppingListService } from 'src/app/shopping-list/shopping-list.service';
+import { RecipesService } from '../recipes.service';
+import { NgForm } from '@angular/forms';
+import { Ingredient } from 'src/app/shared/models/ingredient.model';
+import { throwIfEmpty } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-recipe-details',
@@ -8,16 +13,19 @@ import { ShoppingListService } from 'src/app/shopping-list/shopping-list.service
   styleUrls: ['./recipe-details.component.scss']
 })
 export class RecipeDetailsComponent implements OnInit {
-  //TODO prepare recipe detail fetching from service
   @Input() recipe: Recipe;
   @Output('closeDetails') close = new EventEmitter<void>();
-  
-  constructor(private shoppingListService: ShoppingListService) { }
+  editIngredientsMode = false;
+  addIngredientMode = false;
+  firstDeleteStep = false;
+
+  constructor(private shoppingListService: ShoppingListService, private recipesService: RecipesService, private router: Router) { }
 
   ngOnInit(): void {
     console.log(this.recipe);
-    // let id:number = this.route.snapshot.params["id"];
-    // this.recipe = this.recipesService.getRecipe(id);
+    this.recipesService.getIngredientsForRecipe(this.recipe.id).subscribe(data => {
+      this.recipe.ingredients = data;
+    });
   }
 
   onClose() {
@@ -28,6 +36,45 @@ export class RecipeDetailsComponent implements OnInit {
   toShoppingList() {
     this.shoppingListService.addToShoppingList(this.recipe.ingredients);
     this.onClose();
+  }
+
+  onEditIngredients() {
+    this.editIngredientsMode = !this.editIngredientsMode;
+  }
+
+  removeRecipe() {
+    if(!this.firstDeleteStep) {
+      this.firstDeleteStep = true;
+    }
+    else if(this.firstDeleteStep) {
+      this.recipesService.removeRecipe(this.recipe.id).subscribe(res=>{
+        this.firstDeleteStep = false;
+        this.onClose();
+        this.router.navigate(['./recipes']);
+      });
+    }
+  }
+
+  removeIngredient(ingredient: Ingredient){
+    this.recipesService.removeIngredient(this.recipe.id, ingredient.id).subscribe(res=> {
+      this.recipesService.getIngredientsForRecipe(this.recipe.id).subscribe(data => {
+        this.recipe.ingredients = data;
+      });
+    });
+  }
+
+  onIngredientSubmit(form: NgForm) {
+    this.recipesService.addIngredient(form.value.name, form.value.amount, form.value.unit, this.recipe.id).subscribe(res=>{
+      this.recipesService.getIngredientsForRecipe(this.recipe.id).subscribe(data => {
+        this.recipe.ingredients = data;
+      });
+      this.toggleAddIngredientMode(form);
+    });
+  }
+
+  toggleAddIngredientMode(form: NgForm = null) {
+    this.addIngredientMode = !this.addIngredientMode;
+    if(form !== null) form.reset();
   }
 
 }

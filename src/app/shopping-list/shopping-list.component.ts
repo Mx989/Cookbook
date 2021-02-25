@@ -28,6 +28,6 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
   
   clearList(): void {
     this.shoppingListService.clearList();
-    this.router.navigate(['/']);
+    this.router.navigate(['./recipes']);
   }
 }

@@ -2,7 +2,8 @@
 <div class="recipe-details-container">
     <div class="recipe-details-container-div recipe-details-header">
         <span class="recipe-title-label"> {{ recipe.name }} </span>
-        <button class="close-details-button" (click)="onClose()">Close</button>
+        <button class="close-details-button" (click)="onEditIngredients()">Edit Ingredients</button>
+        <button class="close-details-button" (click)="removeRecipe()">Remove the recipe</button>
     </div>
     <div class="recipe-details-container-div recipe-details-photo">
         <img [src]="recipe.imagePath"/>
@@ -14,12 +15,33 @@
     <span style="margin-left: 1.5vw;">Ingredients:</span>
         <ul>
             <li *ngFor="let ingredient of recipe.ingredients">
-                {{ingredient.name}} {{ingredient.amount}}
+                {{ingredient.name}} {{ingredient.amount}} {{ingredient.unit}} <p class="ingredient-paragraph" *ngIf="editIngredientsMode" (click)="removeIngredient(ingredient)">Delete</p>
             </li>
+            <div class="background-blur" *ngIf="addIngredientMode"></div>
+            <div class="ingredient-popup" *ngIf="addIngredientMode">
+                <form #ingredientForm="ngForm" (ngSubmit)="onIngredientSubmit(ingredientForm)">
+                    <div class="form-group">
+                        <label for="name">Ingredient name</label>
+                        <input type="text" id="name" class="form-control" ngModel name="name" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="amount">Ingredient Amount</label>
+                        <input type="number" id="amount" class="form-control" ngModel name="amount" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="unit">Ingredient Unit</label>
+                        <input type="text" id="unit" class="form-control" ngModel name="unit" required />
+                    </div>
+                    <div>
+                        <button class="btn btn-primary" type="submit" [disabled]="!ingredientForm.valid">Add</button>
+                        <button class="btn btn-primary" type="button" (click)="toggleAddIngredientMode(ingredientForm)">Cancel</button>
+                    </div>
+                </form>
+            </div>
+            <p *ngIf="editIngredientsMode" class="paragraph-main-color" (click)="toggleAddIngredientMode()">Add new ingredient</p>
         </ul>
     </div>
     <div class="recipe-details-container-div">
         <button class="add-to-list-button" (click)="toShoppingList()">Add to shopping list</button>
     </div>
-
 </div>
