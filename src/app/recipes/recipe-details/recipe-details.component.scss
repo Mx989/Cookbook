@@ -23,16 +23,9 @@ $mainColor: rgba(57, 204, 204, 0.75);
 
 
 .close-details-button {
-    all: unset;
     margin-top: 1vh;
     margin-right: 1vw;
     float: right;
-    background: $mainColor;
-    border-radius: 2px;
-    padding: 6px;
-    color: white;
-    font-weight: bold;
-
 }
 
     .close-details-button:hover {
@@ -40,21 +33,9 @@ $mainColor: rgba(57, 204, 204, 0.75);
     }
 
 .add-to-list-button {
-    all: unset;
     margin-bottom: 1vh;
     margin-left: 1vw;
-    display: flex;
-    background: $mainColor;
-    border-radius: 2px;
-    padding: 6px;
-    color: white;
-    font-weight: bold;
-    
 }
-
-    .add-to-list-button:hover {
-        background: darken($color: ($mainColor), $amount: 20%);
-    }
 
 .recipe-details-container-div {
     width: 95%;
@@ -76,12 +57,12 @@ $mainColor: rgba(57, 204, 204, 0.75);
 .recipe-details-photo {
     display: inline-block;
     margin-left: 1vw;
+    max-height: 25vh;
+    max-width: 40vw;
+    overflow: hidden;
     .img {
-        
         width: auto;
         height: auto;
-        max-width: 200px;
-        max-height: 200px;
     }
 }
 
@@ -107,6 +88,7 @@ $mainColor: rgba(57, 204, 204, 0.75);
     z-index: 101;
     background: white;
     box-shadow: 0 2px 5px rgba($color: #000000, $alpha: 0.25);
+    padding: 2em;
 }
 
 .ingredient-paragraph {
@@ -117,4 +99,9 @@ $mainColor: rgba(57, 204, 204, 0.75);
 
 .paragraph-main-color {
     color: $mainColor;
+}
+
+.btn-primary {
+    background-color: $mainColor;
+    border-color: $mainColor;
 }

@@ -16,8 +16,9 @@ export class AddRecipeComponent implements OnInit {
   }
 
   onSubmit(form: NgForm){
-    this.recipesService.addRecipe(form.value.name, form.value.description, form.value.imgPath).subscribe();
-    this.router.navigate(['./recipes']);
+    this.recipesService.addRecipe(form.value.name, form.value.description, form.value.imgPath).subscribe( res=>{
+      this.router.navigate(['./recipes']);
+    });
   }
 
   return() {

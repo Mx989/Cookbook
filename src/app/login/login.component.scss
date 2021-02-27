@@ -1,5 +1,29 @@
+$primary: #39cccc;
+
 .imggg{
     width: 40vh;
     height: 40vh;
-    border: 1px solid black;
+    border-right: 1px solid #676767;
+}
+
+.btn-primary {
+    background: $primary;
+    border-color: $primary;
+}
+
+.logo-paragraph {
+    font-weight: bold;
+    color: $primary;
+    
+    
+    
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.logo-holder {
+    padding-top: 42%;
+    display: flex;
+    margin-top: auto;
+    margin-bottom: auto;
 }

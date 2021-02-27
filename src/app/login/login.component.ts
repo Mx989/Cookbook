@@ -39,6 +39,7 @@ export class LoginComponent implements OnInit {
       const email = form.value.email;
       this.loginService.signup(username, email, password).subscribe(res => {
         console.log(res);
+        this.isLoginMode = true;
       },
       error => {
         console.log(error);

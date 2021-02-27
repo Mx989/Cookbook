@@ -3,9 +3,9 @@
     <div *ngFor="let recipeEl of recipes" class="recipe">
             <img [src]="recipeEl.imagePath"/>
             <p (click)="toggleRecipeDetails(recipeEl)">{{ recipeEl.name }}</p>
-            <app-recipe-details *ngIf="selectedRecipeId == recipeEl.id" [recipe]="recipeEl" (closeDetails)="toggleRecipeDetails()"></app-recipe-details>
+            <app-recipe-details *ngIf="selectedRecipeId == recipeEl.id" [recipe]="recipeEl" (closeDetails)="toggleRecipeDetails()" (refreshRecipes)="onRefresh()"></app-recipe-details>
     </div>
-    <div class="recipe plus">
+    <div *ngIf="admMode" class="recipe plus">
             <p (click)="onAddNewRecipe()">Add new recipe</p> 
         </div>
 

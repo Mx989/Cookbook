@@ -2,8 +2,8 @@
 <div class="recipe-details-container">
     <div class="recipe-details-container-div recipe-details-header">
         <span class="recipe-title-label"> {{ recipe.name }} </span>
-        <button class="close-details-button" (click)="onEditIngredients()">Edit Ingredients</button>
-        <button class="close-details-button" (click)="removeRecipe()">Remove the recipe</button>
+        <button *ngIf="admMode" class="btn btn-primary close-details-button" (click)="onEditIngredients()">Edit Ingredients</button>
+        <button *ngIf="admMode" class="btn btn-primary close-details-button" (click)="removeRecipe()">Remove the recipe</button>
     </div>
     <div class="recipe-details-container-div recipe-details-photo">
         <img [src]="recipe.imagePath"/>
@@ -15,7 +15,7 @@
     <span style="margin-left: 1.5vw;">Ingredients:</span>
         <ul>
             <li *ngFor="let ingredient of recipe.ingredients">
-                {{ingredient.name}} {{ingredient.amount}} {{ingredient.unit}} <p class="ingredient-paragraph" *ngIf="editIngredientsMode" (click)="removeIngredient(ingredient)">Delete</p>
+                {{ingredient.name}} {{ingredient.amount}} {{ingredient.unit}} <p class="ingredient-paragraph" *ngIf="editIngredientsMode && admMode" (click)="removeIngredient(ingredient)">Delete</p>
             </li>
             <div class="background-blur" *ngIf="addIngredientMode"></div>
             <div class="ingredient-popup" *ngIf="addIngredientMode">
@@ -38,10 +38,10 @@
                     </div>
                 </form>
             </div>
-            <p *ngIf="editIngredientsMode" class="paragraph-main-color" (click)="toggleAddIngredientMode()">Add new ingredient</p>
+            <button *ngIf="editIngredientsMode && admMode" class="btn btn-primary" (click)="toggleAddIngredientMode()">Add new ingredient</button>
         </ul>
     </div>
     <div class="recipe-details-container-div">
-        <button class="add-to-list-button" (click)="toShoppingList()">Add to shopping list</button>
+        <button class="btn btn-primary add-to-list-button" (click)="toShoppingList()">Add to shopping list</button>
     </div>
 </div>

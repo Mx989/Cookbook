@@ -6,6 +6,7 @@ import { NgForm } from '@angular/forms';
 import { Ingredient } from 'src/app/shared/models/ingredient.model';
 import { throwIfEmpty } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { LoginService } from 'src/app/login/login.service';
 
 @Component({
   selector: 'app-recipe-details',
@@ -15,16 +16,21 @@ import { Router } from '@angular/router';
 export class RecipeDetailsComponent implements OnInit {
   @Input() recipe: Recipe;
   @Output('closeDetails') close = new EventEmitter<void>();
+  @Output('refreshRecipes') refresh = new EventEmitter<void>();
   editIngredientsMode = false;
   addIngredientMode = false;
   firstDeleteStep = false;
+  admMode = false;
 
-  constructor(private shoppingListService: ShoppingListService, private recipesService: RecipesService, private router: Router) { }
+  constructor(private shoppingListService: ShoppingListService, private recipesService: RecipesService, private loginService: LoginService, private router: Router) { }
 
   ngOnInit(): void {
     console.log(this.recipe);
     this.recipesService.getIngredientsForRecipe(this.recipe.id).subscribe(data => {
       this.recipe.ingredients = data;
+    });
+    this.loginService.currentUser.subscribe(user =>{
+      if(user.role === "Administrator") this.admMode = true;
     });
   }
 
@@ -51,6 +57,7 @@ export class RecipeDetailsComponent implements OnInit {
         this.firstDeleteStep = false;
         this.onClose();
         this.router.navigate(['./recipes']);
+        this.refresh.emit();
       });
     }
   }

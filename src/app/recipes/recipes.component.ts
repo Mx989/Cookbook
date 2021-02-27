@@ -2,6 +2,8 @@ import { Component, OnInit, Input, HostListener, OnDestroy } from '@angular/core
 import { Recipe } from './recipe.model';
 import { RecipesService } from './recipes.service';
 import { Router } from '@angular/router';
+import { LoginService } from '../login/login.service';
+import { User } from '../shared/models/user.model';
 
 @Component({
   selector: 'app-recipes',
@@ -14,15 +16,20 @@ export class RecipesComponent implements OnInit, OnDestroy {
   //detailsOpen: boolean = false;
   selectedRecipeId: Number = -1;
   recipes: Recipe[];
+  currentUser: User;
+  admMode = false;
 
-  constructor(private recipesService: RecipesService, private router: Router) { }
+  constructor(private recipesService: RecipesService, private loginService: LoginService, private router: Router) { }
 
   ngOnInit(): void {
     this.recipesService.getRecipes().subscribe(recipes => {
       this.recipes = recipes;
     });
 
-    //this.recipesService.uploadRecipes();
+    this.loginService.currentUser.subscribe(user => {
+      this.currentUser = user;
+      if(this.currentUser.role === "Administrator") this.admMode = true;
+    });
   }
 
   toggleRecipeDetails(recipe: Recipe = null) {
@@ -31,9 +38,14 @@ export class RecipesComponent implements OnInit, OnDestroy {
     }
     else {
       this.selectedRecipeId = recipe.id;
-      //this.detailsOpen = !this.detailsOpen;
-      //console.log(this.detailsOpen);
     }
+  }
+
+  onRefresh() {
+    this.router.navigate(['./recipes']);
+    this.recipesService.getRecipes().subscribe(recipes => {
+      this.recipes = recipes;
+    });
   }
 
   onAddNewRecipe() {

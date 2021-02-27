@@ -58,3 +58,11 @@ $mainColor: rgba(57, 204, 204, 0.75);
     top: 25vh;
     z-index: 101;
 }
+
+.btn-primary {
+    margin-top: 1vh;
+    margin-right: 1vw;
+    float: right;
+    background: $mainColor;
+    border-color: $mainColor;
+}
